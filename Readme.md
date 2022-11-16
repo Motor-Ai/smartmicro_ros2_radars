@@ -6,15 +6,27 @@
 There is a need for a node that will interface with a smartmicro radar driver and publish the data
 acquired by the sensor through the ROS2 pipeline. This package implements such a node.
 
-## Get the Smart Access release
+
+## Building and Testing
+Accept the agreement and get the smartaccess release
 ```bash
 ./smart_extract.sh
 ```
-
-## How to launch this node
+Build. (Before building make sure you are not on a virtual environment like venv or conda).
 ```
+colcon build
+```
+Source workspace and launch node
+```
+source install/setup.bash
 ros2 launch umrr_ros2_driver radar.launch.py
 ```
+Now source the workspace from another terminal, you should be able to list the published topics and echo the pointclouds
+```
+ros2 topic list
+ros2 topic echo /umrr/targets_7
+```
+
 
 ## Prerequisites
 
@@ -25,20 +37,6 @@ ros2 launch umrr_ros2_driver radar.launch.py
 A [smartmicro](https://www.smartmicro.com/automotive-radar) UMRR96, UMRR11, DRVEGRD 152 or DRVEGRD 169 radar are 
 required to run this node. This code is bundled with a version of Smart Access API. Please make
 sure the version used to publish the data is compatible with this version:
-
-- Date of release: `November 11, 2022`
-- Smart Access Automotive version: `v2.1.0`
-- User interface version: `UMRR96 Type 153 AUTOMOTIVE v1.2.1`
-- User interface version: `UMRR11 Type 132 AUTOMOTIVE v1.1.1`
-- User interface version: `UMRR9F Type 169 AUTOMOTIVE v1.1.1`
-- User interface version: `UMRR9D Type 152 AUTOMOTIVE v1.0.1`
-
-### Sensor Firmwares
-This ROS2 driver release is compatible with the following sensor firmwares:
-- UMRR11 Type 132: V5.1.4
-- UMRR96 Type 153: V5.2.4
-- UMRR9D Type 152: V1.0.0
-- UMRR9F Type 169: V1.3.0
 
 ### Point cloud message wrapper library
 To add targets to the point cloud in a safe and quick fashion a
@@ -119,50 +117,4 @@ The sensor services respond with certain value codes. The following is a lookup 
 7   |    Value out of minimal bounds
 8   |    Value out of maximal bounds
 
-## Development
-The dockerfile can be used to build and test the ros driver.
 
-### Prerequisites
-
-- Docker version >= 20.10.14
-- Docker compose version >= 1.29.2
-
-## Building and Testing
-Accept the agreement and get the smartaccess release
-```bash
-./smart_extract.sh
-```
-
-Building docker container
-```bash
-docker build . -t umrr-ros:latest
-```
-
-Building the driver with the docker container
-```bash
-docker run --rm -v`pwd`:/code umrr-ros colcon build
-```
-
-Running the unit and integration tests via the docker compose
-```bash
-docker-compose up
-```
-
-Getting the test coverage via the docker container
-```bash
-docker run --rm -v`pwd`:/code umrr-ros colcon test-result --all --verbose
-```
-
-Stop and remove docker containers and networks
-```bash
-docker-compose down
-```
-## ARMv8 Support
-The Smart Access release which will be downloaded using the script also offers platform support for armv8. In order to build the driver on an armv8 machine, the [`CMakeLists.txt`](umrr_ros2_driver/CMakeLists.txt) should be adopted.
-Instead of using the default `lib-linux-x86_64_gcc_9` the user should plugin the `lib-linux-armv8-gcc_9` for armv8.
- 
-## Contribution
-This project is a joint effort between [smartmicro](https://www.smartmicro.com/) and [Apex.AI](https://www.apex.ai/). The initial version of the code was developed by Igor Bogoslavskyi of Apex.AI (@niosus) and was thereafter adapted and extended by smartmicro.
-
-## License
-Licensed under the [Apache 2.0 License](LICENSE).
