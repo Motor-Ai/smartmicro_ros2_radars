@@ -36,6 +36,7 @@
 
 #include "umrr_ros2_msgs/srv/set_ip.hpp"
 #include "umrr_ros2_msgs/srv/set_mode.hpp"
+#include "umrr_ros2_msgs/srv/set_time_to_sys.hpp"
 
 namespace smartmicro
 {
@@ -45,7 +46,7 @@ namespace radar
 {
 namespace detail
 {
-constexpr auto kMaxSensorCount = 10UL;
+constexpr auto kMaxSensorCount = 13UL;
 
 struct SensorConfig
 {
@@ -162,6 +163,13 @@ private:
     const std::shared_ptr<com::master::ResponseBatch> & response);
 
   ///
+  /// @brief      Callback for setting time to systime.
+  ///
+  void sensor_response_ts(
+    const com::types::ClientId client_id,
+    const std::shared_ptr<com::master::ResponseBatch> & response);
+
+  ///
   /// @brief      Send instructions to the sensor.
   ///
   void radar_mode(
@@ -175,8 +183,16 @@ private:
     const std::shared_ptr<umrr_ros2_msgs::srv::SetIp::Request> request,
     std::shared_ptr<umrr_ros2_msgs::srv::SetIp::Response> response);
 
+  ///
+  /// @brief      Set sensor time to systime.
+  ///
+  void set_time_to_systime(
+    const std::shared_ptr<umrr_ros2_msgs::srv::SetTimeToSys::Request> request,
+    std::shared_ptr<umrr_ros2_msgs::srv::SetTimeToSys::Response> response);
+
   rclcpp::Service<umrr_ros2_msgs::srv::SetMode>::SharedPtr mode_srv_;
   rclcpp::Service<umrr_ros2_msgs::srv::SetIp>::SharedPtr ip_addr_srv_;
+  rclcpp::Service<umrr_ros2_msgs::srv::SetTimeToSys>::SharedPtr time_to_systime_srv_;
 
   std::array<detail::SensorConfig, detail::kMaxSensorCount> m_sensors{};
 
