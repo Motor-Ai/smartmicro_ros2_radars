@@ -40,7 +40,8 @@ def generate_launch_description():
         package=PACKAGE_NAME,
         executable='smartmicro_radar_node_exe',
         parameters=[LaunchConfiguration('radar_param_file')],
-        name='smartmicro_radar_node'
+        name='smartmicro_radar_node',
+        arguments=['--ros-args', '--log-level', 'debug']
     )
 
     return LaunchDescription([
