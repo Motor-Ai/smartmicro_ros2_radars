@@ -167,7 +167,8 @@ private:
   ///
   void sensor_response_ts(
     const com::types::ClientId client_id,
-    const std::shared_ptr<com::master::ResponseBatch> & response);
+    const std::shared_ptr<com::master::ResponseBatch> & response,
+    const std::string instruction_name);
 
   ///
   /// @brief      Send instructions to the sensor.

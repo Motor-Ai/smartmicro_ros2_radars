@@ -1,3 +1,4 @@
+string param
 uint32 sensor_id
 ---
 string res
