@@ -23,7 +23,7 @@
               # The port to be used.
               port: 55555
               # The frame_id to be set to the published messages.
-              frame_id: "umrr"
+              frame_id: "umrr_0"
               # Specify the history size.
               history_size: 10
           sensor_1:
@@ -36,7 +36,7 @@
               # The port to be used.
               port: 55555
               # The frame_id to be set to the published messages.
-              frame_id: "umrr"
+              frame_id: "umrr_1"
               # Specify the history size.
               history_size: 10
           sensor_2:
@@ -49,7 +49,7 @@
               # The port to be used.
               port: 55555
               # The frame_id to be set to the published messages.
-              frame_id: "umrr"
+              frame_id: "umrr_2"
               # Specify the history size.
               history_size: 10
           sensor_3:
@@ -62,7 +62,7 @@
               # The port to be used.
               port: 55555
               # The frame_id to be set to the published messages.
-              frame_id: "umrr"
+              frame_id: "umrr_3"
               # Specify the history size.
               history_size: 10
           sensor_4:
@@ -75,7 +75,7 @@
               # The port to be used.
               port: 55555
               # The frame_id to be set to the published messages.
-              frame_id: "umrr"
+              frame_id: "umrr_4"
               # Specify the history size.
               history_size: 10
           sensor_5:   
@@ -88,7 +88,7 @@
               # The port to be used.
               port: 55555
               # The frame_id to be set to the published messages.
-              frame_id: "umrr"
+              frame_id: "umrr_5"
               # Specify the history size.
               history_size: 10
           sensor_6:       
@@ -101,7 +101,7 @@
               # The port to be used.
               port: 55555
               # The frame_id to be set to the published messages.
-              frame_id: "umrr"
+              frame_id: "umrr_6"
               # Specify the history size.
               history_size: 10
           sensor_7:       
@@ -114,7 +114,7 @@
               # The port to be used.
               port: 55555
               # The frame_id to be set to the published messages.
-              frame_id: "umrr"
+              frame_id: "umrr_7"
               # Specify the history size.
               history_size: 10
           sensor_8:       
@@ -127,7 +127,7 @@
               # The port to be used.
               port: 55555
               # The frame_id to be set to the published messages.
-              frame_id: "umrr"
+              frame_id: "umrr_8"
               # Specify the history size.
               history_size: 10
           sensor_9:       
@@ -140,7 +140,7 @@
               # The port to be used.
               port: 55555
               # The frame_id to be set to the published messages.
-              frame_id: "umrr"
+              frame_id: "umrr_9"
               # Specify the history size.
               history_size: 10
           sensor_10:       
@@ -153,7 +153,7 @@
               # The port to be used.
               port: 55555
               # The frame_id to be set to the published messages.
-              frame_id: "umrr"
+              frame_id: "umrr_10"
               # Specify the history size.
               history_size: 10
           sensor_11:       
@@ -166,6 +166,6 @@
               # The port to be used.
               port: 55555
               # The frame_id to be set to the published messages.
-              frame_id: "umrr"
+              frame_id: "umrr_11"
               # Specify the history size.
               history_size: 10
