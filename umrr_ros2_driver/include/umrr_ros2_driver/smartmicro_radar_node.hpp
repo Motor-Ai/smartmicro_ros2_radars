@@ -184,6 +184,7 @@ private:
     const std::shared_ptr<umrr_ros2_msgs::srv::SetIp::Request> request,
     std::shared_ptr<umrr_ros2_msgs::srv::SetIp::Response> response);
 
+  void set_sys_time_auto()
   ///
   /// @brief      Set sensor time to systime.
   ///

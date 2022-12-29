@@ -211,10 +211,75 @@ SmartmicroRadarNode::SmartmicroRadarNode(const rclcpp::NodeOptions & node_option
       &SmartmicroRadarNode::set_time_to_systime, this, std::placeholders::_1, std::placeholders::_2));
 
   RCLCPP_INFO(this->get_logger(), "Radar services are ready.");
-
+  this->set_sys_time_auto();
   std::signal(SIGINT, [](int signal) { return terminate_on_receive(signal); });
 }
 
+void SmartmicroRadarNode::set_sys_time_auto()
+{
+  std::vector<std::string> instruction_names = {"comp_timebase_set_seconds_val", "comp_timebase_set_frac_seconds_val"};
+  //client_id = request->sensor_id;
+  std::shared_ptr<InstructionServiceIface> inst{m_services->GetInstructionService()};
+  timer = this->create_wall_timer(
+      std::chrono::seconds(2), std::bind(&SmartmicroRadarNode::my_timer_callback, this));
+
+  std::shared_ptr<InstructionBatch> batch;
+
+  rclcpp::Time ros_time = this->get_clock()->now();
+
+  std::shared_ptr<CmdRequest> sec_cmd =
+      std::make_shared<CmdRequest>("auto_interface_command", "comp_timebase_set_seconds_val", ros_time.seconds());
+  std::shared_ptr<CmdRequest> frac_sec_cmd =
+      std::make_shared<CmdRequest>("auto_interface_command", "comp_timebase_set_frac_seconds_val", ros_time.nanoseconds()/1e9);
+
+
+
+  for(const std::string instruction_name : instruction_names)
+  {
+    rclcpp::Time ros_time = this->get_clock()->now();
+
+    std::shared_ptr<CmdRequest> sec_cmd =
+        std::make_shared<CmdRequest>("auto_interface_command", "comp_timebase_set_seconds_val", ros_time.seconds());
+    std::shared_ptr<CmdRequest> frac_sec_cmd =
+        std::make_shared<CmdRequest>("auto_interface_command", "comp_timebase_set_frac_seconds_val", ros_time.nanoseconds()/1e9);
+
+    if (instruction_name == "comp_timebase_set_seconds_val")
+    {
+      if (!batch->AddRequest(sec_cmd))
+      {
+        result->res = "Failed to add instruction to batch! ";
+        return;
+      }
+    }
+    else
+    {
+      if (!batch->AddRequest(sec_cmd))
+      {
+        result->res = "Failed to add instruction to batch! ";
+        return;
+      }
+      if (!batch->AddRequest(frac_sec_cmd))
+      {
+        result->res = "Failed to add instruction to batch! ";
+        return;
+      }
+    }
+
+    if (
+        com::types::ERROR_CODE_OK != inst->SendInstructionBatch(
+                                        batch, std::bind(
+                                                    &SmartmicroRadarNode::sensor_response_ts, this, client_id,
+                                                    std::placeholders::_2, instruction_name)))
+    {
+      result->res = "Check param is listed for sensor type and the min/max values!";
+      return;
+    }
+    result->res = "Service conducted successfully";
+    std::this_thread::sleep_for(50ms);
+  }
+
+
+}
 void terminate_on_receive(int signal)
 {
   RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "SIGINT has been received");
@@ -369,7 +434,7 @@ void SmartmicroRadarNode::set_time_to_systime(
     std::shared_ptr<umrr_ros2_msgs::srv::SetTimeToSys::Response> result)
 {
   std::string instruction_name{request->param};
-  client_id = request->sensor_id;
+  
 
   std::shared_ptr<InstructionServiceIface> inst{m_services->GetInstructionService()};
   timer = this->create_wall_timer(
