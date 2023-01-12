@@ -542,7 +542,7 @@ void SmartmicroRadarNode::targetlist_callback_umrr96(
          range * std::sin(elevation_angle), target->GetSpeedRadial(), target->GetPower(),
          target->GetRCS(), target->GetTgtNoise(), snr});
     }
-
+    msg.header.stamp = this->get_clock()->now();
     m_publishers[sensor_idx]->publish(msg);
   }
 }
