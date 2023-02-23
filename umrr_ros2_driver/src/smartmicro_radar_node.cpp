@@ -305,18 +305,11 @@ void SmartmicroRadarNode::radar_mode(
   std::shared_ptr<SetParamRequest<float>> radar_mode_02 =
     std::make_shared<SetParamRequest<float>>("auto_interface_0dim", request->param, request->value);
 
-  std::shared_ptr<CmdRequest> cmd =
-  std::make_shared<CmdRequest>("auto_interface_command", "comp_eeprom_ctrl_save_param_sec", 2010);
-
   if (!batch->AddRequest(radar_mode_01)) {
     result->res = "Failed to add instruction to the batch! ";
   }
   if (!batch->AddRequest(radar_mode_02)) {
     result->res = "Failed to add instruction to the batch! ";
-  }
-  if (!batch->AddRequest(cmd)) {
-  result->res = "Failed to add instruction to batch! ";
-  return;
   }
 
   if (
