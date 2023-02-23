@@ -188,6 +188,13 @@ private:
     const std::shared_ptr<com::master::ResponseBatch> & response);
 
   ///
+  /// @brief      Callback for changing IP destination address.
+  ///
+  void sensor_response_ip_dest(
+    const com::types::ClientId client_id,
+    const std::shared_ptr<com::master::ResponseBatch> & response);
+
+  ///
   /// @brief      Callback for setting time to systime.
   ///
   void sensor_response_ts(
@@ -206,6 +213,13 @@ private:
   /// @brief      Configure the sensor ip address.
   ///
   void ip_address(
+    const std::shared_ptr<umrr_ros2_msgs::srv::SetIp::Request> request,
+    std::shared_ptr<umrr_ros2_msgs::srv::SetIp::Response> response);
+
+  ///
+  /// @brief      Configure the sensor ip address.
+  ///
+  void ip_dest_address(
     const std::shared_ptr<umrr_ros2_msgs::srv::SetIp::Request> request,
     std::shared_ptr<umrr_ros2_msgs::srv::SetIp::Response> response);
 
