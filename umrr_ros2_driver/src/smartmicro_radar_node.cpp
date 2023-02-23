@@ -218,7 +218,7 @@ SmartmicroRadarNode::SmartmicroRadarNode(const rclcpp::NodeOptions & node_option
       &SmartmicroRadarNode::ip_address, this, std::placeholders::_1, std::placeholders::_2));
 
     // create a ros2 service to change the IP destination address
-  ip_addr_srv_ = create_service<umrr_ros2_msgs::srv::SetIp>(
+  ip_dest_addr_srv_ = create_service<umrr_ros2_msgs::srv::SetIp>(
     "smart_radar/set_ip_dest_address",
     std::bind(
       &SmartmicroRadarNode::ip_dest_address, this, std::placeholders::_1, std::placeholders::_2));

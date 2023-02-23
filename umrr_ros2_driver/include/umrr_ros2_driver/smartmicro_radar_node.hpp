@@ -239,6 +239,7 @@ private:
   rclcpp::Service<umrr_ros2_msgs::srv::SetTimeToSys>::SharedPtr time_to_systime_srv_;
   rclcpp::Service<umrr_ros2_msgs::srv::SetMode>::SharedPtr mode_srv_;
   rclcpp::Service<umrr_ros2_msgs::srv::SetIp>::SharedPtr ip_addr_srv_;
+  rclcpp::Service<umrr_ros2_msgs::srv::SetIp>::SharedPtr ip_dest_addr_srv_;
   rclcpp::Service<umrr_ros2_msgs::srv::SendCommand>::SharedPtr command_srv_;
 
   std::array<detail::SensorConfig, detail::kMaxSensorCount> m_sensors{};
