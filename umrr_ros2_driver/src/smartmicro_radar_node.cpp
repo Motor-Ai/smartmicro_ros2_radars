@@ -225,7 +225,7 @@ SmartmicroRadarNode::SmartmicroRadarNode(const rclcpp::NodeOptions & node_option
 
   // create a ros2 service to change the radar time
   time_to_systime_srv_ = create_service<umrr_ros2_msgs::srv::SetTimeToSys>( 
-    "smart_radar_node/set_time_to_sys",
+    "smart_radar/set_time_to_sys",
     std::bind(
       &SmartmicroRadarNode::set_time_to_systime, this, std::placeholders::_1, std::placeholders::_2));
 
