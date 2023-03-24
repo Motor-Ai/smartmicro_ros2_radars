@@ -32,6 +32,16 @@ endif()
 find_package(ament_cmake_auto REQUIRED)
 find_package(Threads REQUIRED)
 
+if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/smartmicro")
+    set(API_CMD "${CMAKE_CURRENT_SOURCE_DIR}/api_extract.sh")
+    execute_process(COMMAND ${API_CMD} 
+                    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+                    RESULT_VARIABLE CMD_ERROR)
+    if(NOT CMD_ERROR EQUAL "0")
+        message(FATAL_ERROR "${API_CMD} failed with ${CMD_ERROR}")
+    endif()
+endif()
+
 fetchcontent_declare(json
     GIT_REPOSITORY https://github.com/nlohmann/json.git
     GIT_TAG v3.10.5
