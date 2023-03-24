@@ -28,7 +28,8 @@
 #include <umrr11_t132_automotive_v1_1_1/DataStreamServiceIface.h>
 #include <umrr96_t153_automotive_v1_2_1/DataStreamServiceIface.h>
 #include <umrr9f_t169_automotive_v1_1_1/DataStreamServiceIface.h>
-#include <umrr9d_t152_automotive_v1_0_1/DataStreamServiceIface.h>
+#include <umrr9f_t169_automotive_v2_0_0/DataStreamServiceIface.h>
+#include <umrr9d_t152_automotive_v1_0_2/DataStreamServiceIface.h>
 
 #include <array>
 #include <memory>
@@ -37,6 +38,7 @@
 #include "umrr_ros2_msgs/srv/set_ip.hpp"
 #include "umrr_ros2_msgs/srv/set_mode.hpp"
 #include "umrr_ros2_msgs/srv/set_time_to_sys.hpp"
+#include "umrr_ros2_msgs/srv/send_command.hpp"
 
 namespace smartmicro
 {
@@ -118,11 +120,26 @@ private:
   /// @param[in]  client_id  The client_id of the sensor
   ///
 
-  void targetlist_callback_umrr9f(
+  void targetlist_callback_umrr9f_v1_1_1(
     const std::uint32_t sensor_idx,
     const std::shared_ptr<
       com::master::umrr9f_t169_automotive_v1_1_1::comtargetlistport::ComTargetListPort> &
       targetlist_port_umrr9f,
+    const com::types::ClientId client_id);
+  ///
+  /// @brief      A callback that is called when a new target list port for
+  /// umrr9f arrives.
+  ///
+  /// @param[in]  sensor_idx   The sensor id for respective published topic.
+  /// @param[in]  target_list_port  The target list port
+  /// @param[in]  client_id  The client_id of the sensor
+  ///
+
+  void targetlist_callback_umrr9f_v2_0_0(
+    const std::uint32_t sensor_idx,
+    const std::shared_ptr<
+      com::master::umrr9f_t169_automotive_v2_0_0::comtargetlistport::ComTargetListPort> &
+      targetlist_port_umrr9f_v2_0_0,
     const com::types::ClientId client_id);
   
   ///
@@ -137,7 +154,7 @@ private:
   void targetlist_callback_umrr9d(
     const std::uint32_t sensor_idx,
     const std::shared_ptr<
-      com::master::umrr9d_t152_automotive_v1_0_1::comtargetlistport::ComTargetListPort> &
+      com::master::umrr9d_t152_automotive_v1_0_2::comtargetlistport::ComTargetListPort> &
       targetlist_port_umrr9d,
     const com::types::ClientId client_id);
 
@@ -148,17 +165,32 @@ private:
   void update_config_files_from_params();
 
   ///
-  /// @brief      Callaback for getting the instruction response.
+  /// @brief      Callaback for getting the parameter response.
   ///
-  void sensor_response(
+  void mode_response(
     const com::types::ClientId client_id,
     const std::shared_ptr<com::master::ResponseBatch> & response,
     const std::string instruction_name);
 
   ///
+  /// @brief      Callaback for getting the command response.
+  ///
+  void command_response(
+    const com::types::ClientId client_id,
+    const std::shared_ptr<com::master::ResponseBatch> & response,
+    const std::string command_name);
+
+  ///
   /// @brief      Callback for changing IP address.
   ///
   void sensor_response_ip(
+    const com::types::ClientId client_id,
+    const std::shared_ptr<com::master::ResponseBatch> & response);
+
+  ///
+  /// @brief      Callback for changing IP destination address.
+  ///
+  void sensor_response_ip_dest(
     const com::types::ClientId client_id,
     const std::shared_ptr<com::master::ResponseBatch> & response);
 
@@ -185,15 +217,30 @@ private:
     std::shared_ptr<umrr_ros2_msgs::srv::SetIp::Response> response);
 
   ///
+  /// @brief      Configure the sensor ip address.
+  ///
+  void ip_dest_address(
+    const std::shared_ptr<umrr_ros2_msgs::srv::SetIp::Request> request,
+    std::shared_ptr<umrr_ros2_msgs::srv::SetIp::Response> response);
+
+  ///
   /// @brief      Set sensor time to systime.
   ///
   void set_time_to_systime(
     const std::shared_ptr<umrr_ros2_msgs::srv::SetTimeToSys::Request> request,
     std::shared_ptr<umrr_ros2_msgs::srv::SetTimeToSys::Response> response);
 
+  /// @brief      Send command to the sensor.
+  ///
+  void radar_command(
+    const std::shared_ptr<umrr_ros2_msgs::srv::SendCommand::Request> request,
+    std::shared_ptr<umrr_ros2_msgs::srv::SendCommand::Response> response);
+  
+  rclcpp::Service<umrr_ros2_msgs::srv::SetTimeToSys>::SharedPtr time_to_systime_srv_;
   rclcpp::Service<umrr_ros2_msgs::srv::SetMode>::SharedPtr mode_srv_;
   rclcpp::Service<umrr_ros2_msgs::srv::SetIp>::SharedPtr ip_addr_srv_;
-  rclcpp::Service<umrr_ros2_msgs::srv::SetTimeToSys>::SharedPtr time_to_systime_srv_;
+  rclcpp::Service<umrr_ros2_msgs::srv::SetIp>::SharedPtr ip_dest_addr_srv_;
+  rclcpp::Service<umrr_ros2_msgs::srv::SendCommand>::SharedPtr command_srv_;
 
   std::array<detail::SensorConfig, detail::kMaxSensorCount> m_sensors{};
 
@@ -214,8 +261,9 @@ bool check_signal = false;
 std::shared_ptr<com::master::CommunicationServicesIface> m_services{};
 std::shared_ptr<com::master::umrr11_t132_automotive_v1_1_1::DataStreamServiceIface> data_umrr11{};
 std::shared_ptr<com::master::umrr96_t153_automotive_v1_2_1::DataStreamServiceIface> data_umrr96{};
-std::shared_ptr<com::master::umrr9f_t169_automotive_v1_1_1::DataStreamServiceIface> data_umrr9f{};
-std::shared_ptr<com::master::umrr9d_t152_automotive_v1_0_1::DataStreamServiceIface> data_umrr9d{};
+std::shared_ptr<com::master::umrr9f_t169_automotive_v1_1_1::DataStreamServiceIface> data_umrr9f_v1_1_1{};
+std::shared_ptr<com::master::umrr9f_t169_automotive_v2_0_0::DataStreamServiceIface> data_umrr9f_v2_0_0{};
+std::shared_ptr<com::master::umrr9d_t152_automotive_v1_0_2::DataStreamServiceIface> data_umrr9d{};
 
 }  // namespace radar
 }  // namespace drivers
