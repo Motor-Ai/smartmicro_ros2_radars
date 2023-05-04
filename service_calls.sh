@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # To disable CAN output
-ros2 service call /smart_radar/set_radar_mode umrr_ros2_msgs/srv/SetMode "{param: "output_control_target_list_can", value: 0, sensor_id: 107}"
+# ros2 service call /smart_radar/set_radar_mode umrr_ros2_msgs/srv/SetMode "{param: "output_control_target_list_can", value: 0, sensor_id: 107}"
 
-# To set sync. master
+# To set sync. master (only to master)
 ros2 service call /smart_radar/set_radar_mode umrr_ros2_msgs/srv/SetMode "{param: "sync_mode", value: 1, sensor_id: 107}"
 
 # To set no. of sync slaves in group-1 (only to master)
@@ -35,4 +35,15 @@ ros2 service call /smart_radar/set_time_to_sys umrr_ros2_msgs/srv/SetTimeToSys "
 # To save the paremeters to persistent memory (to all the sensors)
 ros2 service call /smart_radar/send_command umrr_ros2_msgs/srv/SendCommand "{command: "comp_eeprom_ctrl_save_param_sec", sensor_id: 100}"
 
+# To change ip address of the sensor
+ros2 service call /smart_radar/set_ip_address umrr_ros2_msgs/srv/SetIp "{value_ip: 3232238400, sensor_id: 100}"
 
+# ip 	       | decimal	
+# 192.168.11.1 = 3232238337
+# 192.168.11.2 = 3232238338
+# 192.168.11.3 =? 
+# 192.168.11.4 =? 
+# 192.168.11.5 =? 
+# 192.168.11.6 =? 
+# 192.168.11.7 =? 
+# 192.168.11.8 =? 
