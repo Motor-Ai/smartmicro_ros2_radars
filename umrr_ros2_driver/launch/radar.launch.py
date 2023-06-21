@@ -27,6 +27,9 @@ PACKAGE_NAME = 'umrr_ros2_driver'
 
 def generate_launch_description():
     """Generate the launch description."""
+    
+    os.sched_setaffinity(0, [3])
+
     radar_param_file = os.path.join(
         get_package_share_directory(PACKAGE_NAME), 'param/radar.template.yaml')
 
