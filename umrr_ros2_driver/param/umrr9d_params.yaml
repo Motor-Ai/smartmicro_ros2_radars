@@ -1,0 +1,93 @@
+---
+/**:
+  ros__parameters:
+    # The client_id to be set in smart_access_config.json, must be a unique integer.
+      master_client_id: 1000
+      # This sets the dev_id in the hw_inventory.json
+      hw_dev_id: 2
+      # This sets the port in the hw_inventory.json
+      hw_port: 55555
+      # This sets the iface_name in the hw_inventory.json
+      hw_iface_name: "enp9s0f0"
+      # An array of sensors to subscribe to.
+      sensors:
+          # As many as 10 sensors all named as "sensor_<number>" in increasing order of numbers,
+          # e.g., sensor_0, sensor_1, etc. The list must start with sensor_0.
+          sensor_0:
+              # The model of the connected sensor.
+              model: "umrr9d"
+              # The client_id of the sensor/source, must be a unique integer.
+              id: 100
+              # The ip address of the sensor or of the source acting as a sensor.
+              ip: "192.168.11.0"
+              # The port to be used.
+              port: 55555
+              # The frame_id to be set to the published messages.
+              frame_id: "umrr_0"
+              # Specify the history size.
+              history_size: 10
+          sensor_1:
+              # The model of the connected sensor.
+              model: "umrr9d"
+              # The client_id of the sensor/source, must be a unique integer.
+              id: 131
+              # The ip address of the sensor or of the source acting as a sensor.
+              ip: "192.168.11.31"
+              # The port to be used.
+              port: 55555
+              # The frame_id to be set to the published messages.
+              frame_id: "umrr_31"
+              # Specify the history size.
+              history_size: 10
+          sensor_2:
+              # The model of the connected sensor.
+              model: "umrr9d"
+              # The client_id of the sensor/source, must be a unique integer.
+              id: 132
+              # The ip address of the sensor or of the source acting as a sensor.
+              ip: "192.168.11.32"
+              # The port to be used.
+              port: 55555
+              # The frame_id to be set to the published messages.
+              frame_id: "umrr_32"
+              # Specify the history size.
+              history_size: 10
+          sensor_3:
+              # The model of the connected sensor.
+              model: "umrr9d"
+              # The client_id of the sensor/source, must be a unique integer.
+              id: 133
+              # The ip address of the sensor or of the source acting as a sensor.
+              ip: "192.168.11.33"
+              # The port to be used.
+              port: 55555
+              # The frame_id to be set to the published messages.
+              frame_id: "umrr_33"
+              # Specify the history size.
+              history_size: 10
+          sensor_4:
+              # The model of the connected sensor.
+              model: "umrr9d"
+              # The client_id of the sensor/source, must be a unique integer.
+              id: 134
+              # The ip address of the sensor or of the source acting as a sensor.
+              ip: "192.168.11.34"
+              # The port to be used.
+              port: 55555
+              # The frame_id to be set to the published messages.
+              frame_id: "umrr_34"
+              # Specify the history size.
+              history_size: 10
+          sensor_5:
+              # The model of the connected sensor.
+              model: "umrr9d"
+              # The client_id of the sensor/source, must be a unique integer.
+              id: 111
+              # The ip address of the sensor or of the source acting as a sensor.
+              ip: "192.168.11.11"
+              # The port to be used.
+              port: 55555
+              # The frame_id to be set to the published messages.
+              frame_id: "umrr_11"
+              # Specify the history size.
+              history_size: 10

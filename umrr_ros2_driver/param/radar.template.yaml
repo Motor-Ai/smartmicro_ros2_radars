@@ -8,7 +8,7 @@
       # This sets the port in the hw_inventory.json
       hw_port: 55555
       # This sets the iface_name in the hw_inventory.json
-      hw_iface_name: "enp9s0f0"
+      hw_iface_name: "eno1"
       # An array of sensors to subscribe to.
       sensors:
           # As many as 10 sensors all named as "sensor_<number>" in increasing order of numbers,
@@ -28,59 +28,137 @@
               history_size: 10
           sensor_1:
               # The model of the connected sensor.
-              model: "umrr9d"
+              model: "umrr96"
               # The client_id of the sensor/source, must be a unique integer.
-              id: 131
+              id: 101
               # The ip address of the sensor or of the source acting as a sensor.
-              ip: "192.168.11.31"
+              ip: "192.168.11.1"
               # The port to be used.
               port: 55555
               # The frame_id to be set to the published messages.
-              frame_id: "umrr_31"
+              frame_id: "umrr_1"
               # Specify the history size.
               history_size: 10
           sensor_2:
               # The model of the connected sensor.
-              model: "umrr9d"
+              model: "umrr96"
               # The client_id of the sensor/source, must be a unique integer.
-              id: 132
+              id: 102
               # The ip address of the sensor or of the source acting as a sensor.
-              ip: "192.168.11.32"
+              ip: "192.168.11.2"
               # The port to be used.
               port: 55555
               # The frame_id to be set to the published messages.
-              frame_id: "umrr_32"
+              frame_id: "umrr_2"
               # Specify the history size.
               history_size: 10
           sensor_3:
               # The model of the connected sensor.
-              model: "umrr9d"
+              model: "umrr96"
               # The client_id of the sensor/source, must be a unique integer.
-              id: 133
+              id: 103
               # The ip address of the sensor or of the source acting as a sensor.
-              ip: "192.168.11.33"
+              ip: "192.168.11.3"
               # The port to be used.
               port: 55555
               # The frame_id to be set to the published messages.
-              frame_id: "umrr_33"
+              frame_id: "umrr_3"
               # Specify the history size.
               history_size: 10
           sensor_4:
               # The model of the connected sensor.
-              model: "umrr9d"
+              model: "umrr96"
               # The client_id of the sensor/source, must be a unique integer.
-              id: 134
+              id: 104
               # The ip address of the sensor or of the source acting as a sensor.
-              ip: "192.168.11.34"
+              ip: "192.168.11.4"
               # The port to be used.
               port: 55555
               # The frame_id to be set to the published messages.
-              frame_id: "umrr_34"
+              frame_id: "umrr_4"
               # Specify the history size.
               history_size: 10
-          sensor_5:
+          sensor_5:   
               # The model of the connected sensor.
-              model: "umrr9d"
+              model: "umrr96"
+              # The client_id of the sensor/source, must be a unique integer.
+              id: 105
+              # The ip address of the sensor or of the source acting as a sensor.
+              ip: "192.168.11.5"
+              # The port to be used.
+              port: 55555
+              # The frame_id to be set to the published messages.
+              frame_id: "umrr_5"
+              # Specify the history size.
+              history_size: 10
+          sensor_6:       
+              # The model of the connected sensor.
+              model: "umrr96"
+              # The client_id of the sensor/source, must be a unique integer.
+              id: 106
+              # The ip address of the sensor or of the source acting as a sensor.
+              ip: "192.168.11.6"
+              # The port to be used.
+              port: 55555
+              # The frame_id to be set to the published messages.
+              frame_id: "umrr_6"
+              # Specify the history size.
+              history_size: 10
+          sensor_7:       
+              # The model of the connected sensor.
+              model: "umrr96"
+              # The client_id of the sensor/source, must be a unique integer.
+              id: 107
+              # The ip address of the sensor or of the source acting as a sensor.
+              ip: "192.168.11.7"
+              # The port to be used.
+              port: 55555
+              # The frame_id to be set to the published messages.
+              frame_id: "umrr_7"
+              # Specify the history size.
+              history_size: 10
+          sensor_8:       
+              # The model of the connected sensor.
+              model: "umrr96"
+              # The client_id of the sensor/source, must be a unique integer.
+              id: 108
+              # The ip address of the sensor or of the source acting as a sensor.
+              ip: "192.168.11.8"
+              # The port to be used.
+              port: 55555
+              # The frame_id to be set to the published messages.
+              frame_id: "umrr_8"
+              # Specify the history size.
+              history_size: 10
+          sensor_9:       
+              # The model of the connected sensor.
+              model: "umrr96"
+              # The client_id of the sensor/source, must be a unique integer.
+              id: 109
+              # The ip address of the sensor or of the source acting as a sensor.
+              ip: "192.168.11.9"
+              # The port to be used.
+              port: 55555
+              # The frame_id to be set to the published messages.
+              frame_id: "umrr_9"
+              # Specify the history size.
+              history_size: 10
+          sensor_10:       
+              # The model of the connected sensor.
+              model: "umrr96"
+              # The client_id of the sensor/source, must be a unique integer.
+              id: 110
+              # The ip address of the sensor or of the source acting as a sensor.
+              ip: "192.168.11.10"
+              # The port to be used.
+              port: 55555
+              # The frame_id to be set to the published messages.
+              frame_id: "umrr_10"
+              # Specify the history size.
+              history_size: 10
+          sensor_11:       
+              # The model of the connected sensor.
+              model: "umrr96"
               # The client_id of the sensor/source, must be a unique integer.
               id: 111
               # The ip address of the sensor or of the source acting as a sensor.
