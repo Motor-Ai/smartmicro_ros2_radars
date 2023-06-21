@@ -6,26 +6,28 @@
 # To set sync. master (only to master)
 ros2 service call /smart_radar/set_radar_mode umrr_ros2_msgs/srv/SetMode "{param: "sync_mode", value: 1, sensor_id: 107}"
 
-# To set no. of sync slaves in group-1 (only to master)
+# To set no. of sync slaves in group-1 (including master) (only to master)
 ros2 service call /smart_radar/set_radar_mode umrr_ros2_msgs/srv/SetMode "{param: "sync_nof_devices_1st_group", value: 1, sensor_id: 107}"
 
 # To set no. of sync slaves in group-2 (only to master)
 ros2 service call /smart_radar/set_radar_mode umrr_ros2_msgs/srv/SetMode "{param: "sync_nof_devices_2nd_group", value: 0, sensor_id: 107}"
 
-# To set no. of time sync. devices (only to master)
+# To set time sync mode (only to master)
+ros2 service call /smart_radar/set_radar_mode umrr_ros2_msgs/srv/SetMode "{param: "time_sync_mode", value: 1, sensor_id: 107}"
+
+# To set no. of time sync. devices (including master) (only to master)
 ros2 service call /smart_radar/set_radar_mode umrr_ros2_msgs/srv/SetMode "{param: "time_sync_nof_devices", value: 1, sensor_id: 107}"
 
 # To set sync. slaves
 ros2 service call /smart_radar/set_radar_mode umrr_ros2_msgs/srv/SetMode "{param: "sync_mode", value: 2, sensor_id: 101}"
 
-# To set sync. slave id
+# To set sync. slave id (can be from 1 to 7, the Master sensor identifier is always 0)
 ros2 service call /smart_radar/set_radar_mode umrr_ros2_msgs/srv/SetMode "{param: "sync_slave_identifier", value: 1, sensor_id: 101}"
 
 # To set sync. group identifier
 ros2 service call /smart_radar/set_radar_mode umrr_ros2_msgs/srv/SetMode "{param: "sync_group_identifier", value: 0, sensor_id: 101}"
 
-# To set time sync
-ros2 service call /smart_radar/set_radar_mode umrr_ros2_msgs/srv/SetMode "{param: "time_sync_mode", value: 1, sensor_id: 107}"
+# To set time sync (slaves)
 ros2 service call /smart_radar/set_radar_mode umrr_ros2_msgs/srv/SetMode "{param: "time_sync_mode", value: 2, sensor_id: 101}"
 
 # To set global UTC time (only to master) (run both commands below in order)
