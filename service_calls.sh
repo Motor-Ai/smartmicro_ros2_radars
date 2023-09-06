@@ -40,6 +40,9 @@ ros2 service call /smart_radar/send_command umrr_ros2_msgs/srv/SendCommand "{com
 # To change ip address of the sensor
 ros2 service call /smart_radar/set_ip_address umrr_ros2_msgs/srv/SetIp "{value_ip: 3232238400, sensor_id: 100}"
 
+# To change destination-ip address of the sensor
+ros2 service call /smart_radar/set_ip_dest_address umrr_ros2_msgs/srv/SetIp "{value_ip: 3232238353, sensor_id: 100}"
+
 # ip 	       | decimal	
 # 192.168.11.1 = 3232238337
 # 192.168.11.2 = 3232238338
